@@ -4,6 +4,7 @@ import com.matheusob25.projetoweb.entities.User;
 import com.matheusob25.projetoweb.repositories.UserRepository;
 import com.matheusob25.projetoweb.services.exceptions.DatabaseException;
 import com.matheusob25.projetoweb.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -40,9 +41,14 @@ public class UserService {
         }
     }
     public User update(Long id,User user){
-        User entitiy = userRepository.getReferenceById(id);
-        updateData(entitiy, user);
-        return userRepository.save(entitiy);
+        try {
+            User entitiy = userRepository.getReferenceById(id);
+            updateData(entitiy, user);
+            return userRepository.save(entitiy);
+        }catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }
+        return null;
     }
     private void updateData(User entitiy, User user){
         entitiy.setName(user.getName());
