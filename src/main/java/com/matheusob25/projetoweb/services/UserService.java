@@ -48,7 +48,6 @@ public class UserService {
         }catch (EntityNotFoundException e){
             throw new ResourceNotFoundException(id);
         }
-        return null;
     }
     private void updateData(User entitiy, User user){
         entitiy.setName(user.getName());
