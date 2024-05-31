@@ -1,8 +1,10 @@
 package com.matheusob25.projetoweb.resources;
 
+import com.matheusob25.projetoweb.dto.UserDTO;
 import com.matheusob25.projetoweb.entities.User;
 import com.matheusob25.projetoweb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -32,6 +34,13 @@ public class UserResource {
         return ResponseEntity.ok().body(user);
     }
 
+    @GetMapping(value = "/email/{email}")
+    public ResponseEntity<User> findByEmail(@PathVariable String email){
+        User user = userService.findByEmail(email);
+        return ResponseEntity.ok().body(user);
+    }
+
+
     @PostMapping
     public ResponseEntity<User> save(@RequestBody User user){
         user = userService.insert(user);
@@ -49,4 +58,15 @@ public class UserResource {
         user = userService.update(id, user);
         return ResponseEntity.ok().body(user);
     }
+
+    @PostMapping(value = "/login")
+    public ResponseEntity<User> login(@RequestBody UserDTO userDTO){
+        User user = userService.findByEmail(userDTO.getEmail());
+        if(user != null && user.getPassword().equals(userDTO.getPassword())){
+            return ResponseEntity.ok().body(user);
+        } else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
 }

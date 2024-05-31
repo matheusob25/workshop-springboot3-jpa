@@ -55,4 +55,9 @@ public class UserService {
         entitiy.setPhone(user.getPhone());
     }
 
+    public User findByEmail(String email){
+        Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email));
+        return user.orElseThrow(() -> new ResourceNotFoundException(email));
+    }
+
 }
