@@ -6,6 +6,8 @@ import com.matheusob25.projetoweb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -21,6 +23,7 @@ public class UserResource {
 
     @Autowired
     private UserService userService;
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping
     public ResponseEntity<List<User>> findAll(){
@@ -62,7 +65,7 @@ public class UserResource {
     @PostMapping(value = "/login")
     public ResponseEntity<User> login(@RequestBody UserDTO userDTO){
         User user = userService.findByEmail(userDTO.getEmail());
-        if(user != null && user.getPassword().equals(userDTO.getPassword())){
+        if(user != null && passwordEncoder.matches(userDTO.getPassword(), user.getPassword()) ){
             return ResponseEntity.ok().body(user);
         } else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
