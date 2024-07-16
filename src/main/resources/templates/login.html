@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workshop-SpringBoot-JPA</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
     <header>
@@ -12,7 +12,7 @@
             <a class="logo" href="/">Tapetes e lençóis Lopes</a>
 
             <ul class="nav-list">
-                <li><a href="/index.html">Início</a></li>
+                <li><a href="/src/main/resources/templates/index.html">Início</a></li>
                 <li><a href="/">Sobre</a></li>
                 <li><a href="/">Contato</a></li>
             </ul>
@@ -25,10 +25,10 @@
                 <div class="form-wrapper">
                     <h1>Crie sua conta</h1>
                     <form id="cadastro-form">
-                        <input type="text" class="name" placeholder="Nome">
-                        <input type="email" class="email" placeholder="Email">
-                        <input type="tel" class="phone" placeholder="Telefone">
-                        <input type="password" class="password" placeholder="Senha">
+                        <input type="text" class="name" required placeholder="Nome">
+                        <input type="email" class="email" required placeholder="Email">
+                        <input type="tel" class="phone" required placeholder="Telefone">
+                        <input type="password" class="password"required minlength="6" placeholder="Senha">
                         <button type="submit">Cadastrar</button>
                     </form>
                 </div>
@@ -45,7 +45,7 @@
             </div>
         </div>
     </main>
-        <script src="./script.js"></script>
+        <script src="../static/js/script.js"></script>
         
     </body>
     </html>
