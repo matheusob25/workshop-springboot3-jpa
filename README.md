@@ -9,7 +9,7 @@ Esse documento tem o intuito de mostrar o funcionamento de funções simples com
     
 ## Gerenciador de dependências 
 
-Existem dois gerenciadores de dependências sendo eles o gradle e o maven, eu utilizei o maven por ser mais simpels e declarativo, ou seja eu defino no arquivo de configuração que quero algo, como o driver do JDBC mysql,em seguida o maven gerencia como irá fazer isso e traz a dependência, o maven utiliza o XML para as configurações. O gradle é mais flexível e pode ser configurado por script para algo mais complexo, é baseado em script groovy ou kotlin. No geral ambos podem ser escolhidos e funcionam bem para o java, mas caso o java e o  Spring sejam escolhidos, ainda será debatido a esocolha de um desses dois.
+Existem dois gerenciadores de dependências sendo eles o gradle e o maven, eu utilizei o maven por ser mais simples e declarativo, ou seja eu defino no arquivo de configuração que quero algo, como o driver do JDBC mysql,em seguida o maven gerencia como irá fazer isso e traz a dependência, o maven utiliza o XML para as configurações. O gradle é mais flexível e pode ser configurado por script para algo mais complexo, é baseado em script groovy ou kotlin. No geral ambos podem ser escolhidos e funcionam bem para o java, mas caso o java e o Spring sejam escolhidos, ainda será debatido a esocolha de um desses dois.
 
 ### Arquivo pom.xml onde o Maven é configurado
 <img src="readme_images/pom_maven.png" alt="Arquivo das configurações do Maven">
