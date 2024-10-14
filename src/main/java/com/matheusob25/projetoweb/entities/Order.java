@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
@@ -19,14 +20,20 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") // Aqui é apenas um formatador de como
+                                                                                                // esse campo vai ser retornado como json, e o fuso horário
     private Instant moment;
 
     private Integer orderStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private User client;
+    @ManyToOne // Anotação complementar para o relacionamento de usuário e pedido
+
+    @JoinColumn(name = "client_id") // aqui é criado o campo da chave estrangeira de usuário||cliente dentro da tabela pedidos
+
+    private User client;    // na classe order a variável do tipo user é um client(cliente) por conta da lógica de negócio, por isso na classe User
+                            // a variável order tem um mappedBy = 'client', basicamente o user é identificado como cliente pela classe de pedidos
+
+
 
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();

@@ -23,7 +23,6 @@ public class UserResource {
 
     @Autowired
     private UserService userService;
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping
     public ResponseEntity<List<User>> findAll(){
@@ -42,8 +41,6 @@ public class UserResource {
         User user = userService.findByEmail(email);
         return ResponseEntity.ok().body(user);
     }
-
-
     @PostMapping
     public ResponseEntity<User> save(@RequestBody User user){
         user = userService.insert(user);
@@ -64,12 +61,9 @@ public class UserResource {
 
     @PostMapping(value = "/login")
     public ResponseEntity<User> login(@RequestBody UserDTO userDTO){
-        User user = userService.findByEmail(userDTO.getEmail());
-        if(user != null && passwordEncoder.matches(userDTO.getPassword(), user.getPassword()) ){
-            return ResponseEntity.ok().body(user);
-        } else{
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+        User user = userService.login(userDTO);
+        return ResponseEntity.ok().body(user);
+
     }
 
 }

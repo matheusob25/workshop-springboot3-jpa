@@ -1,11 +1,11 @@
 package com.matheusob25.projetoweb.services;
 
+import com.matheusob25.projetoweb.dto.UserDTO;
 import com.matheusob25.projetoweb.entities.User;
 import com.matheusob25.projetoweb.repositories.UserRepository;
 import com.matheusob25.projetoweb.services.exceptions.DatabaseException;
 import com.matheusob25.projetoweb.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -62,6 +62,16 @@ public class UserService {
     public User findByEmail(String email){
         Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email));
         return user.orElseThrow(() -> new ResourceNotFoundException(email));
+    }
+    public User login(UserDTO userDTO){
+     User user = findByEmail(userDTO.getEmail());
+     if(passwordEncoder.matches(userDTO.getPassword(), user.getPassword())){
+         System.out.println("works!!");
+         return user;
+     }else{
+         throw new ResourceNotFoundException(userDTO.getEmail());
+     }
+
     }
 
 }
