@@ -1,6 +1,6 @@
 # Exemplo simples de API REST em SpringBoot
 
-Esse documento tem o intuito de explicar brevemente sobre com funciona a criação de APIs com o framework Spring Boot e a linguagem java, é explicado um pouco soobre o gerenciador de dependências maven utilizado pelo java, arquitetura em camadas para melhor organização do código, mapeamento objeto relacional com JPA(Java Persistence API) e também cada uma das camadas utilizando de exemplo a entidade de usuário.
+Esse documento tem o intuito de explicar brevemente sobre como funciona a criação de APIs com a linguagem java e seu framework spring boot, é explicado um pouco soobre o gerenciador de dependências maven, arquitetura em camadas para melhor organização do código, mapeamento objeto relacional com JPA(Java Persistence API) e também cada uma das camadas e como elas se comunicam utilizando de exemplo a entidade de usuário.
 
 ## Arquivo de configuração da aplicação
 <img src="readme_images/arquivo_config.png" alt="Arquivo de configuração da aplicação">
