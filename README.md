@@ -1,6 +1,6 @@
 # Exemplo simples de API REST em SpringBoot
 
-Esse documento tem o intuito de mostrar o funcionamento de funções simples como cadastro de usuário e login, e também como funciona o mapeamento objeto-relacional com JPA(Java Persistance API) em uma  relação N:N entre a entidade usuário e pedido. Isso será feito com o intuito de tentar mostrar um pouco sobre a criação de APIs com o framework Spring Boot e a linguagem java.
+Esse documento tem o intuito de explicar brevemente sobre com funciona a criação de APIs com o framework Spring Boot e a linguagem java, é explicado um pouco soobre o gerenciador de dependências maven utilizado pelo java, arquitetura em camadas para melhor organização do código, mapeamento objeto relacional com JPA(Java Persistence API) e também cada uma das camadas utilizando de exemplo a entidade de usuário.
 
 ## Arquivo de configuração da aplicação
 <img src="readme_images/arquivo_config.png" alt="Arquivo de configuração da aplicação">
