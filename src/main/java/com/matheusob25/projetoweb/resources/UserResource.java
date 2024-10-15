@@ -4,10 +4,7 @@ import com.matheusob25.projetoweb.dto.UserDTO;
 import com.matheusob25.projetoweb.entities.User;
 import com.matheusob25.projetoweb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -16,22 +13,22 @@ import java.net.URI;
 import java.util.List;
 import java.util.logging.LogManager;
 
-@RestController
-@CrossOrigin("*")
-@RequestMapping(value = "/users")
+@RestController // anotação para definir que essa classe é um rest controller
+@CrossOrigin("*")  //Cross origin permite que aplicações rodando em domínios ou portas diferentes possam acessar a API
+@RequestMapping(value = "/users") // definindo que a rota padrão para acessar os dados de users será localhost:8080/users
 public class UserResource {
 
-    @Autowired
+    @Autowired // essa anotação facilita para que eu não precise fazer um construtor para injetar um objeto do tipo UserService dentro da variável de forma manual
     private UserService userService;
 
-    @GetMapping
+    @GetMapping // requisição definida como get
     public ResponseEntity<List<User>> findAll(){
-        List<User> users = userService.findAll();
-        return ResponseEntity.ok().body(users);
+        List<User> users = userService.findAll();          //coleta os dados que o service buscou do repository e retorna a resposta com o status
+        return ResponseEntity.ok().body(users);            // status .ok() será o 200 e o body retorna as informações do user em json
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id){
+    @GetMapping(value = "/{id}") // nesse caso dentro da url será necessário passar o parâmetro do user específico que a gente procura
+    public ResponseEntity<User> findById(@PathVariable Long id){      // @PathVariable faz com que a variável dentro da url seja colocada como parâmetro para a função
         User user = userService.findById(id);
         return ResponseEntity.ok().body(user);
     }
@@ -41,10 +38,13 @@ public class UserResource {
         User user = userService.findByEmail(email);
         return ResponseEntity.ok().body(user);
     }
-    @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user){
-        user = userService.insert(user);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
+    @PostMapping   //requisição post
+    public ResponseEntity<User> save(@RequestBody User user){         // request body para que o metodo reconheça como parâmetro um json com os dados de user
+        user = userService.insert(user);                    //
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
+                                              path("/{id}").
+                                              buildAndExpand(user.getId()).
+                                              toUri(); // configurando URI que será retornada ao criar user
         return ResponseEntity.created(uri).body(user);
     }
     @DeleteMapping(value = "/{id}")

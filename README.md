@@ -30,5 +30,26 @@ Existem dois gerenciadores de dependências sendo eles o gradle e o maven, eu ut
 ## Explicação da Arquitetura em camadas utilizada nesse projeto
 <img src="readme_images/arquitetura.png" alt="Arquitetura em camadas">
 
-    Basicamente no topo a gente possui a aplicação que somente vai se comunicar com o resource por requisições http, o único propósito das resources é transformar os dados em requisições(get, post, put e delete) e definir como serão as rotas e o formato da URL.
-### Exemplo de resources
+- ### Camada de resources
+  - Basicamente no topo a gente possui a aplicação que somente vai se comunicar com o resource por requisições http, o único propósito das resources é receber os métodos da camada de services e  transformar esses dados em requisições(get, post, put e delete) e definir como serão esses endpoints e status das respostas.
+- ### Camada de services
+  - Essa camada irá conter toda a lógica de negócio do sistema e também vai ter acesso aos repositories para receber e tratar as funções de CRUD. 
+- ### Camada de repositories
+  - As repositories é aonde acontece a persistência do banco de dados, no contexto do spring é criada uma interface com os métodos simples de CRUD feitos com as entidades, também é possível fazer querys personalizadas e mais complexas caso necessário.
+- ### Camada de entities
+  - Essa camada é a mesma mostrada no início do documento, ela serve como objeto que irá receber os dados persistidos do banco, essa é uma das camadas mais simples com métodos básicos como getters e setters, construtores e outros métodos auxiliares. Cada classe é associada a uma tabela no banco.
+
+## Exemplo de resource
+<img src="readme_images/user_resource.png" alt="Camada de resource de user">
+
+## Exemplo de service
+<img src="readme_images/user_service.png" alt="Camada de service de user">
+
+## Exemplo de repository
+<img src="readme_images/user_repository.png" alt="Camada de repository de user">
+
+## Mostrando cadastro de usuário funcionando no postman com body json
+<img src="readme_images/cadastro.png" alt="Cadastro de usuário">
+ 
+## Listando todos usuários pelo navegador com a url de users
+<img src="readme_images/listagem.png" alt="Listagem de usuários">

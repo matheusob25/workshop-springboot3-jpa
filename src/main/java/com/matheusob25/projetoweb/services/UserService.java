@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service // definindo o service no spring
 public class UserService {
 
     @Autowired
@@ -25,14 +25,14 @@ public class UserService {
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userRepository.findAll(); // funções prontas que a interface UserRepository recebe a super classe extendida
     }
     public User findById(Long id){
-        Optional<User> obj = userRepository.findById(id);
-        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+        Optional<User> obj = userRepository.findById(id); // optional evita que caso o valor do id não seja achado, ele não irá fechar a aplicação por NullPointerException
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id)); // tratando com exceção caso o objeto com o id específico não exista
     }
     public User insert(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));   // criptografando senha
        return userRepository.save(user);
     }
     public void delete(Long id){
